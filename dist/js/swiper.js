@@ -7,7 +7,7 @@
  *
  * Released under the MIT License
  *
- * Released on: June 5, 2018
+ * Released on: July 28, 2018
  */
 
 (function (global, factory) {
@@ -1087,6 +1087,7 @@
   };
 
   var staticAccessors = { components: { configurable: true } };
+
   SwiperClass.prototype.on = function on (events, handler, priority) {
     var self = this;
     if (typeof handler !== 'function') { return self; }
@@ -1097,6 +1098,7 @@
     });
     return self;
   };
+
   SwiperClass.prototype.once = function once (events, handler, priority) {
     var self = this;
     if (typeof handler !== 'function') { return self; }
@@ -1109,6 +1111,7 @@
     }
     return self.on(events, onceHandler, priority);
   };
+
   SwiperClass.prototype.off = function off (events, handler) {
     var self = this;
     if (!self.eventsListeners) { return self; }
@@ -1125,6 +1128,7 @@
     });
     return self;
   };
+
   SwiperClass.prototype.emit = function emit () {
       var args = [], len = arguments.length;
       while ( len-- ) args[ len ] = arguments[ len ];
@@ -1157,6 +1161,7 @@
     });
     return self;
   };
+
   SwiperClass.prototype.useModulesParams = function useModulesParams (instanceParams) {
     var instance = this;
     if (!instance.modules) { return; }
@@ -1168,6 +1173,7 @@
       }
     });
   };
+
   SwiperClass.prototype.useModules = function useModules (modulesParams) {
       if ( modulesParams === void 0 ) modulesParams = {};
 
@@ -1200,11 +1206,13 @@
       }
     });
   };
+
   staticAccessors.components.set = function (components) {
     var Class = this;
     if (!Class.use) { return; }
     Class.use(components);
   };
+
   SwiperClass.installModule = function installModule (module) {
       var params = [], len = arguments.length - 1;
       while ( len-- > 0 ) params[ len ] = arguments[ len + 1 ];
@@ -1231,6 +1239,7 @@
     }
     return Class;
   };
+
   SwiperClass.use = function use (module) {
       var params = [], len = arguments.length - 1;
       while ( len-- > 0 ) params[ len ] = arguments[ len + 1 ];
@@ -1390,13 +1399,13 @@
           slide[0].style.webkitTransform = 'none';
         }
         if (swiper.isHorizontal()) {
-          slideSize = slide[0].getBoundingClientRect().width +
-            parseFloat(slideStyles.getPropertyValue('margin-left')) +
-            parseFloat(slideStyles.getPropertyValue('margin-right'));
+          slideSize = slide[0].getBoundingClientRect().width
+            + parseFloat(slideStyles.getPropertyValue('margin-left'))
+            + parseFloat(slideStyles.getPropertyValue('margin-right'));
         } else {
-          slideSize = slide[0].getBoundingClientRect().height +
-            parseFloat(slideStyles.getPropertyValue('margin-top')) +
-            parseFloat(slideStyles.getPropertyValue('margin-bottom'));
+          slideSize = slide[0].getBoundingClientRect().height
+            + parseFloat(slideStyles.getPropertyValue('margin-top'))
+            + parseFloat(slideStyles.getPropertyValue('margin-bottom'));
         }
         if (currentTransform) {
           slide[0].style.transform = currentTransform;
@@ -1580,17 +1589,15 @@
 
     for (var i = 0; i < slides.length; i += 1) {
       var slide = slides[i];
-      var slideProgress =
-        (
-          (offsetCenter + (params.centeredSlides ? swiper.minTranslate() : 0)) - slide.swiperSlideOffset
-        ) / (slide.swiperSlideSize + params.spaceBetween);
+      var slideProgress = (
+        (offsetCenter + (params.centeredSlides ? swiper.minTranslate() : 0)) - slide.swiperSlideOffset
+      ) / (slide.swiperSlideSize + params.spaceBetween);
       if (params.watchSlidesVisibility) {
         var slideBefore = -(offsetCenter - slide.swiperSlideOffset);
         var slideAfter = slideBefore + swiper.slidesSizesGrid[i];
-        var isVisible =
-                  (slideBefore >= 0 && slideBefore < swiper.size) ||
-                  (slideAfter > 0 && slideAfter <= swiper.size) ||
-                  (slideBefore <= 0 && slideAfter >= swiper.size);
+        var isVisible = (slideBefore >= 0 && slideBefore < swiper.size)
+                  || (slideAfter > 0 && slideAfter <= swiper.size)
+                  || (slideBefore <= 0 && slideAfter >= swiper.size);
         if (isVisible) {
           slides.eq(i).addClass(params.slideVisibleClass);
         }
@@ -1982,7 +1989,7 @@
     var previousIndex = swiper.previousIndex;
     var activeIndex = swiper.activeIndex;
     var rtl = swiper.rtlTranslate;
-    if (swiper.animating && params.preventIntercationOnTransition) {
+    if (swiper.animating && params.preventInteractionOnTransition) {
       return false;
     }
 
@@ -2188,8 +2195,8 @@
       realIndex = parseInt($(swiper.clickedSlide).attr('data-swiper-slide-index'), 10);
       if (params.centeredSlides) {
         if (
-          (slideToIndex < swiper.loopedSlides - (slidesPerView / 2)) ||
-          (slideToIndex > (swiper.slides.length - swiper.loopedSlides) + (slidesPerView / 2))
+          (slideToIndex < swiper.loopedSlides - (slidesPerView / 2))
+          || (slideToIndex > (swiper.slides.length - swiper.loopedSlides) + (slidesPerView / 2))
         ) {
           swiper.loopFix();
           slideToIndex = $wrapperEl
@@ -2414,7 +2421,8 @@
     if (index <= 0) {
       swiper.prependSlide(slides);
       return;
-    } else if (index >= baseLength) {
+    }
+    if (index >= baseLength) {
       swiper.appendSlide(slides);
       return;
     }
@@ -2584,11 +2592,10 @@
     if (device.os && device.os === 'ios') {
       var osVersionArr = device.osVersion.split('.');
       var metaViewport = doc.querySelector('meta[name="viewport"]');
-      device.minimalUi =
-        !device.webView &&
-        (ipod || iphone) &&
-        (osVersionArr[0] * 1 === 7 ? osVersionArr[1] * 1 >= 1 : osVersionArr[0] * 1 > 7) &&
-        metaViewport && metaViewport.getAttribute('content').indexOf('minimal-ui') >= 0;
+      device.minimalUi = !device.webView
+        && (ipod || iphone)
+        && (osVersionArr[0] * 1 === 7 ? osVersionArr[1] * 1 >= 1 : osVersionArr[0] * 1 > 7)
+        && metaViewport && metaViewport.getAttribute('content').indexOf('minimal-ui') >= 0;
     }
 
     // Pixel Ratio
@@ -2603,7 +2610,7 @@
     var data = swiper.touchEventsData;
     var params = swiper.params;
     var touches = swiper.touches;
-    if (swiper.animating && params.preventIntercationOnTransition) {
+    if (swiper.animating && params.preventInteractionOnTransition) {
       return;
     }
     var e = event;
@@ -2626,12 +2633,12 @@
 
     // Do NOT start if iOS edge swipe is detected. Otherwise iOS app (UIWebView) cannot swipe-to-go-back anymore
 
+    var edgeSwipeDetection = params.edgeSwipeDetection || params.iOSEdgeSwipeDetection;
+    var edgeSwipeThreshold = params.edgeSwipeThreshold || params.iOSEdgeSwipeThreshold;
     if (
-      Device.ios &&
-      !Device.cordova &&
-      params.iOSEdgeSwipeDetection &&
-      ((startX <= params.iOSEdgeSwipeThreshold) ||
-      (startX >= win.screen.width - params.iOSEdgeSwipeThreshold))
+      edgeSwipeDetection
+      && ((startX <= edgeSwipeThreshold)
+      || (startX >= win.screen.width - edgeSwipeThreshold))
     ) {
       return;
     }
@@ -2655,9 +2662,9 @@
       var preventDefault = true;
       if ($(e.target).is(data.formElements)) { preventDefault = false; }
       if (
-        doc.activeElement &&
-        $(doc.activeElement).is(data.formElements) &&
-        doc.activeElement !== e.target
+        doc.activeElement
+        && $(doc.activeElement).is(data.formElements)
+        && doc.activeElement !== e.target
       ) {
         doc.activeElement.blur();
       }
@@ -2708,16 +2715,16 @@
       if (swiper.isVertical()) {
         // Vertical
         if (
-          (pageY < touches.startY && swiper.translate <= swiper.maxTranslate()) ||
-          (pageY > touches.startY && swiper.translate >= swiper.minTranslate())
+          (pageY < touches.startY && swiper.translate <= swiper.maxTranslate())
+          || (pageY > touches.startY && swiper.translate >= swiper.minTranslate())
         ) {
           data.isTouched = false;
           data.isMoved = false;
           return;
         }
       } else if (
-        (pageX < touches.startX && swiper.translate <= swiper.maxTranslate()) ||
-        (pageX > touches.startX && swiper.translate >= swiper.minTranslate())
+        (pageX < touches.startX && swiper.translate <= swiper.maxTranslate())
+        || (pageX > touches.startX && swiper.translate >= swiper.minTranslate())
       ) {
         return;
       }
@@ -2739,6 +2746,7 @@
 
     var diffX = touches.currentX - touches.startX;
     var diffY = touches.currentY - touches.startY;
+    if (swiper.params.threshold && Math.sqrt((Math.pow( diffX, 2 )) + (Math.pow( diffY, 2 ))) < swiper.params.threshold) { return; }
 
     if (typeof data.isScrolling === 'undefined') {
       var touchAngle;
@@ -2755,7 +2763,7 @@
     if (data.isScrolling) {
       swiper.emit('touchMoveOpposite', e);
     }
-    if (typeof startMoving === 'undefined') {
+    if (typeof data.startMoving === 'undefined') {
       if (touches.currentX !== touches.startX || touches.currentY !== touches.startY) {
         data.startMoving = true;
       }
@@ -2946,7 +2954,8 @@
       if (currentPos < -swiper.minTranslate()) {
         swiper.slideTo(swiper.activeIndex);
         return;
-      } else if (currentPos > -swiper.maxTranslate()) {
+      }
+      if (currentPos > -swiper.maxTranslate()) {
         if (swiper.slides.length < snapGrid.length) {
           swiper.slideTo(snapGrid.length - 1);
         } else {
@@ -3496,11 +3505,11 @@
     initialSlide: 0,
     speed: 300,
     //
-    preventIntercationOnTransition: false,
+    preventInteractionOnTransition: false,
 
     // To support iOS's swipe-to-go-back gesture (when being used in-app, with UIWebView).
-    iOSEdgeSwipeDetection: false,
-    iOSEdgeSwipeThreshold: 20,
+    edgeSwipeDetection: false,
+    edgeSwipeThreshold: 20,
 
     // Free mode
     freeMode: false,
@@ -3677,8 +3686,8 @@
             params[moduleParamName] = { enabled: true };
           }
           if (
-            typeof params[moduleParamName] === 'object' &&
-            !('enabled' in params[moduleParamName])
+            typeof params[moduleParamName] === 'object'
+            && !('enabled' in params[moduleParamName])
           ) {
             params[moduleParamName].enabled = true;
           }
@@ -3847,6 +3856,7 @@
     Swiper.prototype.constructor = Swiper;
 
     var staticAccessors = { extendedDefaults: { configurable: true },defaults: { configurable: true },Class: { configurable: true },$: { configurable: true } };
+
     Swiper.prototype.slidesPerViewDynamic = function slidesPerViewDynamic () {
       var swiper = this;
       var params = swiper.params;
@@ -3881,6 +3891,7 @@
       }
       return spv;
     };
+
     Swiper.prototype.update = function update$$1 () {
       var swiper = this;
       if (!swiper || swiper.destroyed) { return; }
@@ -3923,6 +3934,7 @@
       }
       swiper.emit('update');
     };
+
     Swiper.prototype.init = function init () {
       var swiper = this;
       if (swiper.initialized) { return; }
@@ -3977,6 +3989,7 @@
       // Emit
       swiper.emit('init');
     };
+
     Swiper.prototype.destroy = function destroy (deleteInstance, cleanStyles) {
       if ( deleteInstance === void 0 ) deleteInstance = true;
       if ( cleanStyles === void 0 ) cleanStyles = true;
@@ -4039,18 +4052,23 @@
 
       return null;
     };
+
     Swiper.extendDefaults = function extendDefaults (newDefaults) {
       Utils.extend(extendedDefaults, newDefaults);
     };
+
     staticAccessors.extendedDefaults.get = function () {
       return extendedDefaults;
     };
+
     staticAccessors.defaults.get = function () {
       return defaults;
     };
+
     staticAccessors.Class.get = function () {
       return SwiperClass$$1;
     };
+
     staticAccessors.$.get = function () {
       return $;
     };
@@ -4134,9 +4152,18 @@
 
       var ObserverFunc = Observer.func;
       var observer = new ObserverFunc(function (mutations) {
-        mutations.forEach(function (mutation) {
-          swiper.emit('observerUpdate', mutation);
-        });
+        // The observerUpdate event should only be triggered
+        // once despite the number of mutations.  Additional
+        // triggers are redundant and are very costly
+        var observerUpdate = function observerUpdate() {
+          swiper.emit('observerUpdate', mutations[0]);
+        };
+
+        if (win.requestAnimationFrame) {
+          win.requestAnimationFrame(observerUpdate);
+        } else {
+          win.setTimeout(observerUpdate, 0);
+        }
       });
 
       observer.observe(target, {
@@ -4420,8 +4447,8 @@
         for (var i = 0; i < swiperCoord.length; i += 1) {
           var point = swiperCoord[i];
           if (
-            point[0] >= 0 && point[0] <= windowWidth &&
-            point[1] >= 0 && point[1] <= windowHeight
+            point[0] >= 0 && point[0] <= windowWidth
+            && point[1] >= 0 && point[1] <= windowHeight
           ) {
             inView = true;
           }
@@ -4505,12 +4532,12 @@
       isSupported = typeof element[eventName] === 'function';
     }
 
-    if (!isSupported &&
-      doc.implementation &&
-      doc.implementation.hasFeature &&
+    if (!isSupported
+      && doc.implementation
+      && doc.implementation.hasFeature
       // always returns true in newer browsers as per the standard.
       // @see http://dom.spec.whatwg.org/#dom-domimplementation-hasfeature
-      doc.implementation.hasFeature('', '') !== true
+      && doc.implementation.hasFeature('', '') !== true
     ) {
       // This is the only way to test support for the `wheel` event in IE9+.
       isSupported = doc.implementation.hasFeature('Events.wheel', '3.0');
@@ -4783,10 +4810,10 @@
       if (params.nextEl) {
         $nextEl = $(params.nextEl);
         if (
-          swiper.params.uniqueNavElements &&
-          typeof params.nextEl === 'string' &&
-          $nextEl.length > 1 &&
-          swiper.$el.find(params.nextEl).length === 1
+          swiper.params.uniqueNavElements
+          && typeof params.nextEl === 'string'
+          && $nextEl.length > 1
+          && swiper.$el.find(params.nextEl).length === 1
         ) {
           $nextEl = swiper.$el.find(params.nextEl);
         }
@@ -4794,10 +4821,10 @@
       if (params.prevEl) {
         $prevEl = $(params.prevEl);
         if (
-          swiper.params.uniqueNavElements &&
-          typeof params.prevEl === 'string' &&
-          $prevEl.length > 1 &&
-          swiper.$el.find(params.prevEl).length === 1
+          swiper.params.uniqueNavElements
+          && typeof params.prevEl === 'string'
+          && $prevEl.length > 1
+          && swiper.$el.find(params.prevEl).length === 1
         ) {
           $prevEl = swiper.$el.find(params.prevEl);
         }
@@ -4888,9 +4915,9 @@
         var $nextEl = ref.$nextEl;
         var $prevEl = ref.$prevEl;
         if (
-          swiper.params.navigation.hideOnClick &&
-          !$(e.target).is($prevEl) &&
-          !$(e.target).is($nextEl)
+          swiper.params.navigation.hideOnClick
+          && !$(e.target).is($prevEl)
+          && !$(e.target).is($nextEl)
         ) {
           if ($nextEl) { $nextEl.toggleClass(swiper.params.navigation.hiddenClass); }
           if ($prevEl) { $prevEl.toggleClass(swiper.params.navigation.hiddenClass); }
@@ -5054,10 +5081,9 @@
         if (params.renderFraction) {
           paginationHTML = params.renderFraction.call(swiper, params.currentClass, params.totalClass);
         } else {
-          paginationHTML =
-          "<span class=\"" + (params.currentClass) + "\"></span>" +
-          ' / ' +
-          "<span class=\"" + (params.totalClass) + "\"></span>";
+          paginationHTML = "<span class=\"" + (params.currentClass) + "\"></span>"
+          + ' / '
+          + "<span class=\"" + (params.totalClass) + "\"></span>";
         }
         $el.html(paginationHTML);
       }
@@ -5082,10 +5108,10 @@
       if ($el.length === 0) { return; }
 
       if (
-        swiper.params.uniqueNavElements &&
-        typeof params.el === 'string' &&
-        $el.length > 1 &&
-        swiper.$el.find(params.el).length === 1
+        swiper.params.uniqueNavElements
+        && typeof params.el === 'string'
+        && $el.length > 1
+        && swiper.$el.find(params.el).length === 1
       ) {
         $el = swiper.$el.find(params.el);
       }
@@ -5220,10 +5246,10 @@
       click: function click(e) {
         var swiper = this;
         if (
-          swiper.params.pagination.el &&
-          swiper.params.pagination.hideOnClick &&
-          swiper.pagination.$el.length > 0 &&
-          !$(e.target).hasClass(swiper.params.pagination.bulletClass)
+          swiper.params.pagination.el
+          && swiper.params.pagination.hideOnClick
+          && swiper.pagination.$el.length > 0
+          && !$(e.target).hasClass(swiper.params.pagination.bulletClass)
         ) {
           swiper.pagination.$el.toggleClass(swiper.params.pagination.hiddenClass);
         }
@@ -5429,8 +5455,8 @@
       var params = swiper.params;
       var $el = scrollbar.$el;
       var target = $el[0];
-      var activeListener = Support.passiveListener && params.passiveListener ? { passive: false, capture: false } : false;
-      var passiveListener = Support.passiveListener && params.passiveListener ? { passive: true, capture: false } : false;
+      var activeListener = Support.passiveListener && params.passiveListeners ? { passive: false, capture: false } : false;
+      var passiveListener = Support.passiveListener && params.passiveListeners ? { passive: true, capture: false } : false;
       if (!Support.touch && (Support.pointerEvents || Support.prefixedPointerEvents)) {
         target.addEventListener(touchEventsDesktop.start, swiper.scrollbar.onDragStart, activeListener);
         doc.addEventListener(touchEventsDesktop.move, swiper.scrollbar.onDragMove, activeListener);
@@ -5457,8 +5483,8 @@
       var params = swiper.params;
       var $el = scrollbar.$el;
       var target = $el[0];
-      var activeListener = Support.passiveListener && params.passiveListener ? { passive: false, capture: false } : false;
-      var passiveListener = Support.passiveListener && params.passiveListener ? { passive: true, capture: false } : false;
+      var activeListener = Support.passiveListener && params.passiveListeners ? { passive: false, capture: false } : false;
+      var passiveListener = Support.passiveListener && params.passiveListeners ? { passive: true, capture: false } : false;
       if (!Support.touch && (Support.pointerEvents || Support.prefixedPointerEvents)) {
         target.removeEventListener(touchEventsDesktop.start, swiper.scrollbar.onDragStart, activeListener);
         doc.removeEventListener(touchEventsDesktop.move, swiper.scrollbar.onDragMove, activeListener);
@@ -5843,19 +5869,19 @@
 
       if (!image.isMoved && !zoom.isScaling) {
         if (
-          swiper.isHorizontal() &&
-          (
-            (Math.floor(image.minX) === Math.floor(image.startX) && image.touchesCurrent.x < image.touchesStart.x) ||
-            (Math.floor(image.maxX) === Math.floor(image.startX) && image.touchesCurrent.x > image.touchesStart.x)
+          swiper.isHorizontal()
+          && (
+            (Math.floor(image.minX) === Math.floor(image.startX) && image.touchesCurrent.x < image.touchesStart.x)
+            || (Math.floor(image.maxX) === Math.floor(image.startX) && image.touchesCurrent.x > image.touchesStart.x)
           )
         ) {
           image.isTouched = false;
           return;
-        } else if (
-          !swiper.isHorizontal() &&
-          (
-            (Math.floor(image.minY) === Math.floor(image.startY) && image.touchesCurrent.y < image.touchesStart.y) ||
-            (Math.floor(image.maxY) === Math.floor(image.startY) && image.touchesCurrent.y > image.touchesStart.y)
+        } if (
+          !swiper.isHorizontal()
+          && (
+            (Math.floor(image.minY) === Math.floor(image.startY) && image.touchesCurrent.y < image.touchesStart.y)
+            || (Math.floor(image.maxY) === Math.floor(image.startY) && image.touchesCurrent.y > image.touchesStart.y)
           )
         ) {
           image.isTouched = false;
@@ -6471,9 +6497,9 @@
     getInterpolateFunction: function getInterpolateFunction(c) {
       var swiper = this;
       if (!swiper.controller.spline) {
-        swiper.controller.spline = swiper.params.loop ?
-          new Controller.LinearSpline(swiper.slidesGrid, c.slidesGrid) :
-          new Controller.LinearSpline(swiper.snapGrid, c.snapGrid);
+        swiper.controller.spline = swiper.params.loop
+          ? new Controller.LinearSpline(swiper.slidesGrid, c.slidesGrid)
+          : new Controller.LinearSpline(swiper.snapGrid, c.snapGrid);
       }
     },
     setTranslate: function setTranslate(setTranslate$1, byController) {
@@ -7184,9 +7210,9 @@
           ty = tx;
           tx = 0;
         }
-        var slideOpacity = swiper.params.fadeEffect.crossFade ?
-          Math.max(1 - Math.abs($slideEl[0].progress), 0) :
-          1 + Math.min(Math.max($slideEl[0].progress, -1), 0);
+        var slideOpacity = swiper.params.fadeEffect.crossFade
+          ? Math.max(1 - Math.abs($slideEl[0].progress), 0)
+          : 1 + Math.min(Math.max($slideEl[0].progress, -1), 0);
         $slideEl
           .css({
             opacity: slideOpacity,
@@ -7364,8 +7390,8 @@
         } else {
           var shadowAngle = Math.abs(wrapperRotate) - (Math.floor(Math.abs(wrapperRotate) / 90) * 90);
           var multiplier = 1.5 - (
-            (Math.sin((shadowAngle * 2 * Math.PI) / 360) / 2) +
-            (Math.cos((shadowAngle * 2 * Math.PI) / 360) / 2)
+            (Math.sin((shadowAngle * 2 * Math.PI) / 360) / 2)
+            + (Math.cos((shadowAngle * 2 * Math.PI) / 360) / 2)
           );
           var scale1 = params.shadowScale;
           var scale2 = params.shadowScale / multiplier;
